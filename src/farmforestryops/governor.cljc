@@ -72,7 +72,7 @@
                                 the cost threshold always requires
                                 human sign-off).
     8. low confidence (< `confidence-floor`)."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [farmforestryops.store :as store]))
 
 (def confidence-floor 0.6)
@@ -101,7 +101,7 @@
    "override the operator's on-site judgment"])
 
 (defn- scope-violation? [proposal]
-  (let [text (str/lower-case (str (:rationale proposal)))]
+  (let [text (str/lower (str (:rationale proposal)))]
     (boolean (some #(str/includes? text %) scope-exclusion-phrases))))
 
 (defn- hard-violations [{:keys [request proposal]} operator-record e]
