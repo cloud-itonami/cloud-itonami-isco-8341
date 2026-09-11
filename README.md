@@ -11,7 +11,7 @@ This repository designs a forkable OSS business for mobile farm and forestry pla
 (`farmforestryops.governor`), following the itonami actor pattern
 (ADR-2607121000): `:intake -> :advise -> :govern -> :decide -+-> :commit
 (:ok?) +-> :request-approval (:escalate?, human-in-the-loop interrupt)
-+-> :hold (:hard?)`. 19 tests / 44 assertions green (`clojure -M:test`).
++-> :hold (:hard?)`. 19 tests / 44 assertions green (`kbb -M:test`).
 HARD invariants (always hold, never overridable): operator provenance,
 no-actuation (`:effect` must be `:propose`), a closed op-allowlist
 (no op that finalizes an equipment-operation/movement decision is ever
