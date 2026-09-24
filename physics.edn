@@ -1,0 +1,34 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a scheduling and logistics coordination robot
+;; plans operator rosters, files equipment service records and coordinates
+;; maintenance orders; it never operates tractors, harvesters or forestry
+;; machines. The physical work it schedules: a forwarder hauling a load of
+;; logs up a skid trail, and the irrigation supply hose whose pump duty the
+;; maintenance orders cover.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-8341"
+ :cases
+ [{:id :forwarder-up-skid-trail
+   :kind :transport
+   :procedure "14 t forwarder hauls a load of logs 200 m up an 8 degree skid trail to the landing"
+   :params {:mass-kg 14000.0 :distance-m 200.0 :v-max-mps 2.0 :a-max-mps2 0.4
+            :brake-decel-mps2 1.0 :drive-force-n 65000.0 :crr 0.08 :slope-deg 8.0
+            :cog-height-m 1.4 :support-half-length-m 2.0 :max-time-s 1800.0}
+   :sweep {:param :payload-kg :values [4000.0 8000.0 12000.0 14000.0 16000.0]}
+   :quantity :cycle-time-s
+   :limit {:max 180.0 :basis "estimate: three minutes per loaded climb in the harvesting plan's cycle"}
+   :boundary {:lo 1000.0 :hi 17000.0}}
+  {:id :irrigation-supply-hose
+   :kind :pipe-flow
+   :procedure "pump feeds a travelling irrigator through 300 m of 110 mm lay-flat supply hose"
+   :params {:diameter-m 0.110 :length-m 300.0 :roughness-m 1.5e-5
+            :density-kg-m3 998.0 :viscosity-pa-s 1.0e-3 :pump-efficiency 0.65}
+   :sweep {:param :q-m3s :values [0.005 0.010 0.015 0.020 0.025]}
+   :quantity :pressure-drop-pa
+   :limit {:max 200000.0 :basis "estimate: share of the irrigation pump's pressure that can be lost in the supply hose while the gun still gets its operating pressure"}
+   :boundary {:lo 0.002 :hi 0.04}}]}
