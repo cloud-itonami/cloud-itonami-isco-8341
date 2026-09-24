@@ -1,5 +1,5 @@
 (ns farmforestryops.governor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [farmforestryops.store :as store]
             [farmforestryops.advisor :as advisor]
             [farmforestryops.governor :as governor]))
