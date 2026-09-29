@@ -1,7 +1,7 @@
 (ns farmforestryops.store
   "SSoT for the ISCO-08 8341 mobile farm and forestry plant operators
   scheduling/logistics coordination actor (itonami actor pattern,
-  ADR-2607121000 / CLAUDE.md Actors section; README's 'Robotics
+  ADR-2607121000 / AGENTS.md Actors section; README's 'Robotics
   premise' — a scheduling and logistics coordination robot performs
   crew-roster planning, equipment service-record filing and
   maintenance-order coordination under this advisor/governor pair,
